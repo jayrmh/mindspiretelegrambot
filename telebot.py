@@ -17,7 +17,7 @@ def help_command(update, context):
     update.message.reply_text('My only purpose is to tell you how you are feeling. Send a Voice Note')
 
 
-def detect_mask(update, context):
+def detect_voice(update, context):
     bot = context.bot
     file = bot.getFile(update.message.voice.file_id)
     file.download('voice.mp3')
@@ -39,6 +39,8 @@ def main():
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help_command))
+    dp.add_handler(MessageHandler(Filters, detect_voice))
+
     updater.start_polling()
     updater.idle()
 if __name__ == '__main__':
