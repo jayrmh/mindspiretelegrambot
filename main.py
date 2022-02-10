@@ -6,6 +6,9 @@ import requests
 
 URL = "http://7bde-87-200-205-229.ngrok.io"
 
+with open('token.txt', 'r') as f:
+    TOKEN=f.read()
+
 def start(update, context):
     update.message.reply_text(
         "Bot by @Mindspire on  mindspireteam@gmail.com \n\n "
@@ -35,7 +38,7 @@ def detect_voice(update, context):
     )
 
 def main():
-    updater = Updater(token="5274860323:AAHpMCpHhXMY9wMUf1BWcVDxfVHDEwY3kIk", use_context=True)
+    updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help_command))
